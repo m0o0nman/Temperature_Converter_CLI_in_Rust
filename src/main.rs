@@ -10,20 +10,31 @@ fn main() {
     let mut flag: bool = true;
 
     while flag == true {
+        input_choice.clear();
         
         io::stdin()
             .read_line(&mut input_choice)
             .expect("Couldnt Read. Try again!");
 
-        let choice: i32 = input_choice
+        match input_choice
             .trim()
-            .parse()
-            .expect("Please enter a valid number");
-
-        if choice == 1 || choice == 2 {flag = false;} else {continue;}  
-        println!("Wrong choice, try again.") 
+            .parse(){
+                Ok(num) if num == 1 || num == 2 => {
+                    choice = num;
+                    flag = false;
+                }
+                _ => {
+                    print!("Wrong choice, try again!")
+                }
+            } 
     }
 
+        // let choice: i32 = input_choice
+        //     .trim()
+        //     .parse()
+        //     .expect("Please enter a valid number");
+
+        // if choice == 1 || choice == 2 {flag = false;} else {continue;}  
     
 
     print!("Your choice was {}", choice);
