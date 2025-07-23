@@ -1,4 +1,5 @@
 use std::io;
+mod converter;
 
 fn main() {
     println!("==========  Welcome to Temperature Converter!  ==========");
@@ -33,7 +34,7 @@ fn main() {
     if choice == 1 {
         println!("Enter temp in celcius: ");
         let mut input: String = String::new();
-        let output: f32;
+        let output: f64;
 
         io::stdin()
             .read_line(&mut input)
@@ -44,11 +45,11 @@ fn main() {
             .parse()
             .expect("Couldn't read line.");
 
-        println!("{:.2}C in farenheit: {:.2}F.", output, c_to_f(output));
+        println!("{:.2}C in farenheit: {:.2}F.", output, converter::celcius_to_farenheit(output));
     } else {
         println!("Enter temp in farenheit: ");
         let mut input: String = String::new();
-        let output: f32;
+        let output: f64;
 
         io::stdin()
             .read_line(&mut input)
@@ -59,16 +60,6 @@ fn main() {
             .parse()
             .expect("Couldn't read line.");
 
-        println!("{:.2}F in celcius: {:.2}C.", output, f_to_c(output));
+        println!("{:.2}F in celcius: {:.2}C.", output, converter::farenheit_to_celcius(output));
     }
-    
-
-}
-
-fn c_to_f(celcius: f32) -> f32 {
-    (1.8 * celcius) + 32.0
-}
-
-fn f_to_c (farenheit: f32) -> f32 {
-    (farenheit - 32.0) * 0.56
 }
