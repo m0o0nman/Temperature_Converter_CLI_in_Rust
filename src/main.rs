@@ -1,43 +1,36 @@
 use std::io;
-//
+
 fn main() {
     println!("==========  Welcome to Temperature Converter!  ==========");
     println!("Select features:\n\n1. Celcius to Farenheit\n2. Farenheit to Celcius");
 
     let mut input_choice: String = String::new();
-    let mut choice: i32 = 0;
+    let choice: i32;
 
-    let mut flag: bool = true;
-
-    while flag == true {
+    loop {
         input_choice.clear();
-        
+
         io::stdin()
             .read_line(&mut input_choice)
-            .expect("Couldnt Read. Try again!");
+            .expect("Couldn't read line");
 
-        match input_choice
-            .trim()
-            .parse(){
-                Ok(num) if num == 1 || num == 2 => {
-                    choice = num;
-                    flag = false;
-                }
-                _ => {
-                    print!("Wrong choice, try again!")
-                }
-            } 
+        match input_choice.trim().parse() {
+            Ok(num) if num == 1 || num == 2 =>{
+                choice = num;
+                break;
+            },
+
+            Ok(_) => {
+                println!("Please enter a number between 1 or 2.")
+            }
+
+            Err(_) => {
+                println!("Please enter a number.");
+            }
+        }
     }
 
-        // let choice: i32 = input_choice
-        //     .trim()
-        //     .parse()
-        //     .expect("Please enter a valid number");
-
-        // if choice == 1 || choice == 2 {flag = false;} else {continue;}  
-    
-
-    print!("Your choice was {}", choice);
+    println!("You chose: {}", choice);
     
 
 }
